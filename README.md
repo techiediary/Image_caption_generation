@@ -12,13 +12,13 @@ biggest challenge now is to be able to make Advanced Driver Assistance Systems(A
 aid the driver with information about the environment around the car. This task renders
 itself useful to such a use case as we can take an image of the surroundings and if it can
 automatically generate a useful caption from the image, it can then be converted into a voice
-command or information that is useful to the driver[1].
+command or information that is useful to the driver.
 2. Google Image search: Another use case is to be able to generate a useful caption for
 any given image initially before searching in Google Images. This way, once the caption is
 generated, we could use that caption to search on Google for better and apt images.
 3. Aid to help the blind: NVIDIA is working on a project that obtains image from the
 surrounding and converts the image of surroundings to textual information that can be played
-on a earpiece to the blind helping them understand their surroundings in more depth[2].
+on a earpiece to the blind helping them understand their surroundings in more depth.
 The application we have tried to bring to light in this project is (b) Google Image Search.
 We wanted to understand and learn about the model that can do the image caption generation and
 train one ourselves to understand the various nuances involved in it. We have implemented the use
@@ -28,7 +28,7 @@ the Image caption generation using CNN and LSTM two deep learning models for the
 vision and natural language processing parts respectively.
 
 ### Introduction
-The idea of caption generation using natural language was rst done by Andrej Karpathy, Li
+The idea of caption generation using natural language was first done by Andrej Karpathy, Li
 Fei-Fei in 2015's IEEE Conference on Computer Vision and Pattern Recognition (CVPR). His
 conference paper[3] was revolutionary in the domain of CV and NLP at its time and has hence
 been used across various domains for various use cases as mentioned in the motivation section
@@ -42,22 +42,22 @@ We have pre-processed the photos with the VGG model (without the output layer) a
 use the extracted features predicted by this model as input. Sequence Processor. This is a
 word embedding layer for handling the text input, followed by a Long Short-Term Memory
 (LSTM) recurrent neural network layer. Decoder (for lack of a better name). Both the
-feature extractor and sequence processor output a xed-length vector. These are merged
-together and processed by a Dense layer to make a nal prediction. The Photo Feature
+feature extractor and sequence processor output a fixed-length vector. These are merged
+together and processed by a Dense layer to make a final prediction. The Photo Feature
 Extractor model expects input photo features to be a vector of 4,096 elements. These are
 processed by a Dense layer to produce a 256 element representation of the photo.
-* The Sequence Processor model expects input sequences with a pre-dened length (34 words)
+* The Sequence Processor model expects input sequences with a pre-defined length (34 words)
 which are fed into an Embedding layer that uses a mask to ignore padded values. This is
 followed by an LSTM layer with 256 memory units.
 Both the input models produce a 256 element vector. Further, both input models use
 regularization in the form of 50
 * The Decoder model merges the vectors from both input models using an addition operation.
-This is then fed to a Dense 256 neuron layer and then to a nal output Dense layer that makes
+This is then fed to a Dense 256 neuron layer and then to a final output Dense layer that makes
 a softmax prediction over the entire output vocabulary for the next word in the sequence.
 3. Problem Statement
-The problem statement for this project is to be able to implement a unied model that has a
+The problem statement for this project is to be able to implement a unified model that has a
 part working with the computer vision side of the project and another model that works with
-the natural language processing side. Thus we have made use of two dierent network models -
+the natural language processing side. Thus we have made use of two different network models -
 Convolutional Neural Network (CNN) for the CV aspects and a Long Short-Term Memory(LSTM)
 for the NLP aspects. Finally the two models are combined into one to link the NLP outputs with
 its corresponding CV counterparts, thereby producing a caption for the given image. For training
@@ -66,13 +66,13 @@ this model, we have made use of the Flickr8k dataset. The details of the dataset
 the next section.
 4 Datasets
 4.1 Training Data
-The dataset used in this project is similar to the one used in[3] - the Flickr8K dataset. The
+The dataset used in this project is similar to the one used in - the Flickr8K dataset. The
 Flickr8K dataset is a free and readily available dataset which we have taken from this link. This
 dataset consists of two parts:
-* Flickr8K Dataset: contains a total of 8092 images in JPEG format with dierent shapes and
+* Flickr8K Dataset: contains a total of 8092 images in JPEG format with different shapes and
 sizes. Of which 6000 are used for training, 1000 for test and 1000 for development. This
 covers the number of images that are there in this.
-* Flickr8K text: Contains text les describing train set, test set. Flickr8k.token.txt contains
+* Flickr8K text: Contains text files describing train set, test set. Flickr8k.token.txt contains
 5 captions for each image i.e. total 40460(8092*5) captions.
 The following is a sample of the image and its corresponding 5 caption texts in the dataset.
 (a) Captions for the girl's image
@@ -83,7 +83,7 @@ For testing we have implemented Web Scraping. Web Scraping is a technique employ
 extract large amounts of data from websites whereby the data is extracted and saved to a local
 le in your computer. We have implemented a web scraping function in our code where we enter
 a query term that describes a component in the image we want to search for on the internet. This
-image is then scraped o the internet and directly fed to the testing part of the model to obtain
+image is then scraped of the internet and directly fed to the testing part of the model to obtain
 the captions.
 3
 5.  Implementation
@@ -105,7 +105,7 @@ image id generated from the code.
 Figure 4: Feature vector and its corresponding image id from VGG
 5.2.  Text Preparation
 The model makes use of a LSTM as mentioned before which is a Recurrent Neural Network(RNN)
-for the NLP activites. A RNN is a class of articial neural networks where connections between
+for the NLP activites. A RNN is a class of artificial neural networks where connections between
 nodes form a directed graph along a temporal sequence. This allows it to exhibit temporal dynamic
 behavior. Derived from feed-forward neural networks, RNNs can use their internal state (memory)
 to process variable length sequences of inputs. This makes them ideal to be able to generate words
@@ -114,7 +114,7 @@ Thus in order to prepare the given text in our dataset to meet the RNN standards
 to perform two main pre-processing steps:
 1. Tokenization: Tokenization is a way of separating a piece of text into smaller units called
 tokens. Here, tokens can be either words, characters, or subwords. Hence, tokenization
-can be broadly classied into 3 types { word, character, and subword (n-gram characters)
+can be broadly classified into 3 types { word, character, and subword (n-gram characters)
 tokenization. Thus for example if we have the sentence " A cat is chasing the mouse.",
 4. 
 the tokenization's output will be the following tokens: A, cat, is, chasing, the, mouse. It
@@ -122,7 +122,7 @@ splits the sentence at every delimiter(here, space). For our given task the foll
 performed as part of the tokenization process:
 • Separate token Id and Image descriptions word by word and put them into two separate
 variables.
-• Remove the le extension from the image ID.
+• Remove the file extension from the image ID.
 • Now concatenate all the word of a single caption into a string again.
 • For every image ID store all 5 captions.
 • Return as a dictionary consisting of lists of image IDs mapped to their corresponding
@@ -137,15 +137,15 @@ our tokens:
 • Remove all word with numbers in them.
 Finally, our code returns the cleaned words as a set named so that we have unique items in
 our vocabulary list which was extracted from the annotations document.
-Now, we make a dictionary of image identiers and descriptions to a new le and save the
-mappings to a le. This is later directly called for any further usage. At the end of this step of
+Now, we make a dictionary of image identifiers and descriptions to a new file and save the
+mappings to a file. This is later directly called for any further usage. At the end of this step of
 text preparation we have a vocabulary size of 8793 from the 8092 images' corresponding captions.
 The following is the output after the text has been pre-processed for the following image id:
 "1000268201 693b08cb0e".
 Figure 5: Captions after text preparation
-5.3 Creating the nal model from CNN and LSTM
+5.3 Creating the final model from CNN and LSTM
 The next step is to combine the CV and NLP elements into a single model. The following function
-performs the transfer learning step for VGG and the NLP as the two inputs to the nal model and
+performs the transfer learning step for VGG and the NLP as the two inputs to the final model and
 lastly inserts the last layers(two Dropout layers and a Dense layer) before adding the LSTM. The
 following is the function snippet that performs the functionality of piecing together the model.
 Figure 7: Basic idea of combined model
@@ -158,7 +158,7 @@ images from the dataset,we move onto testing.
 5.4 Testing
 The metric used to test this project is the Bilingual Evaluation Understudy Score(BLEU).
 This score is a metric for evaluating a generated sentence to a reference sentence. A perfect match
-results in a score of 1.0, whereas a perfect mismatch results in a score of 0.0. Thus we rst tested
+results in a score of 1.0, whereas a perfect mismatch results in a score of 0.0. Thus we first tested
 it using 1000 images from the dataset Flickr8K and obtained the following BLEU values:
 6
 Figure 9: BLEU scores for testing
