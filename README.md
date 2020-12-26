@@ -1,7 +1,7 @@
 
-#Image Caption Generation Using CNN and LSTM
+# Image Caption Generation Using CNN and LSTM
 
-#1 Motivation
+# 1 Motivation
 Image caption generation is a task that requires proper understanding of both Computer Vi-
 sion(CV) techniques and Natural Language Processing(NLP) methods. It uses techniques from
 both domains and puts them together hand in hand to generate captions that are apt for any
@@ -23,7 +23,7 @@ The application we have tried to bring to light in this project is (b) Google Im
 We wanted to understand and learn about the model that can do the image caption generation and
 train one ourselves to understand the various nuances involved in it. We have implemented the use
 case by trying to make use of \Web Scraping", a technology that is often used to scrape data
-from the browsers to nd matching apt images/text/documents etc. Thus this project implements
+from the browsers to find matching apt images/text/documents etc. Thus this project implements
 the Image caption generation using CNN and LSTM two deep learning models for the computer
 vision and natural language processing parts respectively.
 
@@ -54,7 +54,7 @@ regularization in the form of 50
 * The Decoder model merges the vectors from both input models using an addition operation.
 This is then fed to a Dense 256 neuron layer and then to a final output Dense layer that makes
 a softmax prediction over the entire output vocabulary for the next word in the sequence.
-3. Problem Statement
+*. Problem Statement
 The problem statement for this project is to be able to implement a unified model that has a
 part working with the computer vision side of the project and another model that works with
 the natural language processing side. Thus we have made use of two different network models -
@@ -64,8 +64,8 @@ its corresponding CV counterparts, thereby producing a caption for the given ima
 2
 this model, we have made use of the Flickr8k dataset. The details of the dataset are explained in
 the next section.
-4 Datasets
-4.1 Training Data
+4. Datasets
+## Training Data
 The dataset used in this project is similar to the one used in - the Flickr8K dataset. The
 Flickr8K dataset is a free and readily available dataset which we have taken from this link. This
 dataset consists of two parts:
@@ -78,7 +78,7 @@ The following is a sample of the image and its corresponding 5 caption texts in 
 (a) Captions for the girl's image
 (b) The girl's image
 Figure 2: Captions and Features for the above girl's image.
-4.2 Testing data
+## Testing data
 For testing we have implemented Web Scraping. Web Scraping is a technique employed to
 extract large amounts of data from websites whereby the data is extracted and saved to a local
 le in your computer. We have implemented a web scraping function in our code where we enter
@@ -86,8 +86,8 @@ a query term that describes a component in the image we want to search for on th
 image is then scraped of the internet and directly fed to the testing part of the model to obtain
 the captions.
 3
-5.  Implementation
-5.1.  Photo Preparation
+###  Implementation
+##  Photo Preparation
 The idea in this project is to extract the features of the image and directly correlate the higher
 level features with the appropriate text words that get generated in the NLP network. Thus in
 order to be able to extract features from the image we use a transfer learning model with VGG
@@ -103,7 +103,7 @@ ickr8k dataset),
 and the corresponding feature vectors. The following is a snippet that indicates a feature and
 image id generated from the code.
 Figure 4: Feature vector and its corresponding image id from VGG
-5.2.  Text Preparation
+##  Text Preparation
 The model makes use of a LSTM as mentioned before which is a Recurrent Neural Network(RNN)
 for the NLP activites. A RNN is a class of artificial neural networks where connections between
 nodes form a directed graph along a temporal sequence. This allows it to exhibit temporal dynamic
@@ -116,25 +116,25 @@ to perform two main pre-processing steps:
 tokens. Here, tokens can be either words, characters, or subwords. Hence, tokenization
 can be broadly classified into 3 types { word, character, and subword (n-gram characters)
 tokenization. Thus for example if we have the sentence " A cat is chasing the mouse.",
-4. 
+##
 the tokenization's output will be the following tokens: A, cat, is, chasing, the, mouse. It
 splits the sentence at every delimiter(here, space). For our given task the following steps are
 performed as part of the tokenization process:
-• Separate token Id and Image descriptions word by word and put them into two separate
+* Separate token Id and Image descriptions word by word and put them into two separate
 variables.
-• Remove the file extension from the image ID.
-• Now concatenate all the word of a single caption into a string again.
-• For every image ID store all 5 captions.
-• Return as a dictionary consisting of lists of image IDs mapped to their corresponding
+* Remove the file extension from the image ID.
+* Now concatenate all the word of a single caption into a string again.
+* For every image ID store all 5 captions.
+* Return as a dictionary consisting of lists of image IDs mapped to their corresponding
 captions.
 2. Vocabulary: The main aim of Tokenization in any NLP task is to ultimately end up
 with the suitable vocabulary to train the model. Likewise, in order to create meaningful
 vocabulary for our model to learn from we further do the following pre-processing steps to
 our tokens:
-• We convert all the words to Lower case.
-• Remove all the punctuation.
-• Remove " 's " and 'a'
-• Remove all word with numbers in them.
+* We convert all the words to Lower case.
+* Remove all the punctuation.
+* Remove " 's " and 'a'
+* Remove all word with numbers in them.
 Finally, our code returns the cleaned words as a set named so that we have unique items in
 our vocabulary list which was extracted from the annotations document.
 Now, we make a dictionary of image identifiers and descriptions to a new file and save the
@@ -143,40 +143,36 @@ text preparation we have a vocabulary size of 8793 from the 8092 images' corresp
 The following is the output after the text has been pre-processed for the following image id:
 "1000268201 693b08cb0e".
 Figure 5: Captions after text preparation
-5.3 Creating the final model from CNN and LSTM
+##.  Creating the final model from CNN and LSTM
 The next step is to combine the CV and NLP elements into a single model. The following function
 performs the transfer learning step for VGG and the NLP as the two inputs to the final model and
 lastly inserts the last layers(two Dropout layers and a Dense layer) before adding the LSTM. The
 following is the function snippet that performs the functionality of piecing together the model.
-Figure 7: Basic idea of combined model
-5
-Figure 6: Function to create the model
+
 The model summary as produced by the function is as follows:
-Figure 8: Model summary
+
 Having done this model, the training was then done for 20 epochs. After training on the 6000
 images from the dataset,we move onto testing.
-5.4 Testing
+## Testing
 The metric used to test this project is the Bilingual Evaluation Understudy Score(BLEU).
 This score is a metric for evaluating a generated sentence to a reference sentence. A perfect match
 results in a score of 1.0, whereas a perfect mismatch results in a score of 0.0. Thus we first tested
 it using 1000 images from the dataset Flickr8K and obtained the following BLEU values:
 6
-Figure 9: BLEU scores for testing
-5.4.1 Web Scraping
+
+## Web Scraping
 As mentioned before, we tried this image caption generation with web scraping to cater to the
 application of using this tech for Google Image searching. The following function is an implemen-
 tation of the web scraping:
-Figure 10: Function of web scraping
+
 The "query" function paramater bears the string we want to search and scrap o of the web.
 This is given in the fucntion call of this function during the testing. Following is a snippet of the
 function call.
-5.5 Results
+## Results
 For the above testing functiomn call, we obtained the following image o the web and the generated
 caption:
-7
-Figure 11: Query fucntion call - web scraping.
-Figure 12: Result from web scraping
-6.  References
+
+##  References
 [1]https://towardsdatascience.com/image-captioning-with-keras-teaching-computers-to-describe-pictures-
 c88a46a311b8
 [2]https://blogs.nvidia.com/blog/2018/04/26/deep-learning-app-seeing-ai-app/
