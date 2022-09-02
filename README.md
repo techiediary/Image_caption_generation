@@ -173,8 +173,6 @@ For the above testing functiomn call, we obtained the following image o the web
 caption:
 
 ##  References
-[1]https://towardsdatascience.com/image-captioning-with-keras-teaching-computers-to-describe-pictures-
-c88a46a311b8
 [2]https://blogs.nvidia.com/blog/2018/04/26/deep-learning-app-seeing-ai-app/
 [3]A. Karpathy and L. Fei-Fei, "Deep visual-semantic alignments for generating image descrip-
 tions," 2015 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), Boston,
